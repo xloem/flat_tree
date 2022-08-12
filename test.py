@@ -1,5 +1,5 @@
-#from mix_indices import append_indices
 import append_indices
+#import mix_indices
 
 index = append_indices.append_indices(degree=3)
 stored_indices = {}
