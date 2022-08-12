@@ -10,7 +10,7 @@ data = [random.randbytes(random.randint(1,8)) for x in range(24)]
 for chunk in data:
     id = index.leaf_count
     stored_indices[id] = (index.copy(), chunk)
-    index.append(len(chunk), id)
+    index.append(id, len(chunk))
 
 def iterate(index, start_offset, end_offset):
     subendoffset = 0
