@@ -1,5 +1,5 @@
-import append_indices
-#import mix_indices
+#import append_indices
+import mix_indices as append_indices
 
 index = append_indices.append_indices(degree=3)
 stored_indices = {}
@@ -20,13 +20,16 @@ def iterate(index, start_offset, end_offset):
         if subendoffset > start_offset:
             if subleafcount == -1:
                 data = subid
+                yield data
             else:
                 subindex = stored_indices[subid]
                 #adjusted_start = start_offset - substartoffset + suboffset
                 #adjusted_end = end_offset - substartoffset + suboffset
                 #data = b''.join(iterate(subindex, adjusted_start, min(adjusted_end, subsize - adjusted_start)))
                 data = b''.join(iterate(subindex, start_offset, end_offset))
-            yield data
+                data = list(iterate(subindex, start_offset, end_offset))
+                assert len(data) == subleafcount
+                yield from data
             if subendoffset > end_offset:
                 return
             start_offset = subendoffset
