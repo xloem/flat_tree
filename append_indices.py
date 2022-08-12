@@ -11,9 +11,7 @@ class append_indices(list):
             self.leaf_count += leaf_count
             self.size += size
 
-    def append(self, last_publish, added_size):
-        self.leaf_count += 1
-        self.size += added_size
+    def append(self, last_publish, added_size, added_data):
 
         new_leaf_count = self.leaf_count
         new_size = self.size
@@ -26,4 +24,10 @@ class append_indices(list):
         else:
             idx = len(self)
 
-        self[idx:] = [(new_leaf_count, new_size, last_publish)]
+        self[idx:] = [(new_leaf_count, new_size, last_publish), (-1, added_size, added_data)]
+
+        self.size += added_size
+        self.leaf_count += 1
+
+        assert self.size == sum((size for leaf_count, size, id in self))
+        assert self.leaf_count == sum((abs(leaf_count) for leaf_count, size, id in self))
