@@ -1,8 +1,8 @@
 #import append_indices
 #import mix_indices as append_indices
-from flat_tree import append_tree
+from flat_tree import flat_tree
 
-index = append_tree(degree=3)
+index = flat_tree(degree=3)
 stored_indices = {}
 
 import random

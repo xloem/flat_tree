@@ -2,7 +2,7 @@ from . import mix_indices
 
 __version__ = '0.0.0'
 
-class append_tree:
+class flat_tree:
     def __init__(self, degree = 2):
         self.obj = mix_indices.append_indices(degree)
     def append(self, last_snap_locator, added_size, added_data_locator):
