@@ -24,7 +24,10 @@ class append_indices(list):
         else:
             idx = len(self)
 
-        self[idx:] = [(new_leaf_count, new_size, last_publish), (-1, added_size, added_data)]
+        self[idx:] = (
+            (new_leaf_count, new_size, last_publish),
+            (-1, added_size, added_data)
+        )
 
         self.size += added_size
         self.leaf_count += 1

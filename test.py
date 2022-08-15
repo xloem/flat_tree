@@ -1,7 +1,8 @@
 #import append_indices
-import mix_indices as append_indices
+#import mix_indices as append_indices
+from flat_tree import append_tree
 
-index = append_indices.append_indices(degree=3)
+index = append_tree(degree=3)
 stored_indices = {}
 
 import random
@@ -9,12 +10,12 @@ data = [random.randbytes(random.randint(1,8)) for x in range(24)]
 
 for chunk in data:
     id = index.leaf_count
-    stored_indices[id] = index.copy()
+    stored_indices[id] = index.snap()
     index.append(id, len(chunk), chunk)
 
 def iterate(index, start_offset, end_offset):
     subendoffset = 0
-    for subleafcount, *_, subsize, subid in index:
+    for subleafcount, subid, suboffset, subsize in index:
         substartoffset = subendoffset
         subendoffset += subsize
         if subendoffset > start_offset:
@@ -36,7 +37,7 @@ def iterate(index, start_offset, end_offset):
 
 data = b''.join(data)
 print(data)
-cmp = b''.join(iterate(index, 0, index.size))
+cmp = b''.join(iterate(index, 0, index.byte_count))
 print(cmp)
 
 assert data == cmp
