@@ -1,0 +1,9 @@
+[project]
+name = 'flat_tree'
+description = 'tree structions for append only backends'
+dynamic = ['version']
+keywords = ['crypto', 'blockchain', 'algorithm', 'worm', 'data structures']
+license = {text = 'GNU Affero General Public License v3.0 or later'}
+classifiers = [
+	'Programming Language :: Python :: 3',
+]
