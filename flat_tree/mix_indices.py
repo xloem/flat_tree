@@ -1,8 +1,12 @@
 class append_indices(list):
-    def __init__(self, degree = 2):
-        super().__init__()#*initial_indices)
+    def __init__(self, degree = 2, initial_indices = []):
+        super().__init__(initial_indices)
         self.degree = degree
         self.leaf_count, self.size = 0, 0
+        for branch_leaf_count, branch_offset, branch_size, branch_id in self:
+            self.leaf_count += branch_leaf_count if branch_leaf_count > 0 else 1
+            self.size += branch_size
+
         #self.splice_queue = []
 
     def _insert(self, last_publish, *ordered_splices):
