@@ -39,6 +39,8 @@ class append_indices(list):
             else:
                 idx = len(self)
 
+            assert new_size == sum((size for leaf_count, offset, size, value in self[idx:]))
+
             self[idx:] = (
                 #(leaf_count_of_partial_index_at_end_tmp, running_size, spliced_out_start - running_size, last_publish),
                 (new_leaf_count, running_size, new_size, last_publish),
