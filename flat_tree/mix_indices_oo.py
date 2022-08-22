@@ -1,3 +1,54 @@
+#class node:
+#    def __init__(self, length, data, height=0, leaf_count=1, age=0):
+#	self.length = length
+#	self.data = data
+#	self.height = height
+#	self.leaf_count = leaf_count
+#	self.age = age
+#    def __len__(self):
+#	return self.length
+#    def is_leaf(self):
+#	return self.height == 0
+#    def is_full(self, degree = 2):
+#	return self.leaf_count == degree ** self.height
+#    def region(self, start, end, path = [], height=0, leaf_count=1, relative_to=0):
+#	return Region(start, end, self, path, height, leaf_count, relative_to)
+#
+#class Region(node):
+#    def __init__(self, start, end, node, path = [], height=0, leaf_count=1, relative_to=0):
+#	super().__init__(end - start, node, height=height, leaf_count=leaf_count, age=node.age)
+#        self.offset = start - relative_to
+#	self.path = list(path)
+#	self.path.append(self.data)
+#	self.single_child_descendents = []
+#	self.child_count = 0
+#	if not chunk.is_leaf() and (leaf_count==1 or height==0):
+#	    assert leaf_count==1 and height==0
+#	    # calculate leaf_count and height
+#	    self.leaf_count = 0
+#	    self.height = 1
+#	    for entry in self.flush_entries():
+#		self.leaf_count += entry.leaf_count
+#		self.height = max(self.height, entry.height + 1)
+#		self.child_count += 1
+#		if entry.single_child_descendents:
+#		    self.single_child_descendents.extend(entry.single_child_descendents)
+#		elif entry.child_count == 1:
+#		    self.single_child_descendents.append(entry)
+#    def flush_entries(self):
+#	assert not self.data.is_leaf()
+#        start = 0
+#        for entry in self.data.data:
+#            end = start + len(entry)
+#	    if start < self.offset + self.length and end > self.offset:
+#                yield entry.region(max(start, self.offset), min(end, self.offset + self.length), self,path)
+#            start = end
+#    def chunk_data(self):
+#	assert self.is_leaf()
+#	return self.data.data[self.offset : self.offset + self.length]
+#    def region(self, *params, **kwparams):
+#	return self.data.region(*params, **kwparams)
+
 class append_indices(list):
     def __init__(self, degree = 2, initial_indices = []):
         super().__init__(initial_indices)
@@ -47,7 +98,11 @@ class append_indices(list):
 
             self[idx:] = (
                 #(leaf_count_of_partial_index_at_end_tmp, running_size, spliced_out_start - running_size, last_publish),
+
+                #self.region(running_size, running_size + new_size, locator = last_publish),
                 (new_leaf_count, running_size, new_size, last_publish),
+
+                
                 (-1, 0, spliced_in_size, spliced_in_data)
             )
 

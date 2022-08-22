@@ -1,4 +1,4 @@
-from . import mix_indices
+from . import mix_indices_oo as mix_indices
 
 __version__ = '0.0.0'
 
