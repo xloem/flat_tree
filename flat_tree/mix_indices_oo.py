@@ -49,6 +49,11 @@
 #    def region(self, *params, **kwparams):
 #	return self.data.region(*params, **kwparams)
 
+class data_leaf:
+    def __init__(self, locator, length):
+        self.locator = locator
+        self.length = length
+
 class append_indices(list):
     def __init__(self, degree = 2, initial_indices = []):
         super().__init__(initial_indices)
