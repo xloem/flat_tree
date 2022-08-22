@@ -1,8 +1,8 @@
-from . import mix_indices_oo as mix_indices
+from . import mix_indices_oo, mix_indices
 
 __version__ = '0.0.0'
 
-class flat_tree:
+class flat_tree_mix_indices:
     def __init__(self, degree = 2, initial_indices = []):
         self.obj = mix_indices.append_indices(
             degree, [
@@ -29,3 +29,5 @@ class flat_tree:
             for leaf_count, offset, size, value
             in self.obj
         )
+
+flat_tree = flat_tree_mix_indices
