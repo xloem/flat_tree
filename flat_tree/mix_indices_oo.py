@@ -54,6 +54,12 @@ class data_leaf:
         self.locator = locator
         self.length = length
 
+class storage:
+    def store(self, data):
+        raise NotImplementedError()
+    def fetch(self, locator):
+        raise NotImplementedError()
+
 class index_node(list):
     def __init__(self, degree = 2, initial_indices = []):
         super().__init__(initial_indices)
