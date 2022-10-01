@@ -1,3 +1,11 @@
+
+class storage:
+    def store(self, data):
+        raise NotImplementedError()
+    def fetch(self, locator):
+        raise NotImplementedError()
+
+
 #class node:
 #    def __init__(self, length, data, height=0, leaf_count=1, age=0):
 #        self.length = length
@@ -53,12 +61,6 @@ class data_leaf:
     def __init__(self, locator, length):
         self.locator = locator
         self.length = length
-
-class storage:
-    def store(self, data):
-        raise NotImplementedError()
-    def fetch(self, locator):
-        raise NotImplementedError()
 
 class index_node(list):
     def __init__(self, degree = 2, initial_indices = []):
