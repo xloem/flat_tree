@@ -12,7 +12,6 @@ class append_indices(list):
             self.size += size
 
     def append(self, last_publish, added_size, added_data):
-
         new_leaf_count = self.leaf_count
         new_size = self.size
 
