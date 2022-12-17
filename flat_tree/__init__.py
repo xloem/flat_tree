@@ -1,6 +1,6 @@
 from . import mix_indices_oo, mix_indices, append_indices
 
-__version__ = '0.0.0'
+__version__ = '0.0.1'
 
 class flat_tree_append_indices:
     def __init__(self, degree = 2, initial_indices = []):
