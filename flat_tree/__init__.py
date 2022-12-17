@@ -4,15 +4,11 @@ __version__ = '0.0.0'
 
 class flat_tree_append_indices:
     def __init__(self, degree = 2, initial_indices = []):
+        sum = 0
         for leaf_count, value, offset, size in initial_indices:
-            assert offset == 0
-        self.obj = append_indices.append_indices(
-            degree, [
-                (leaf_count, size, value)
-                for leaf_count, value, offset, size
-                in initial_indices
-            ]
-        )
+            assert offset == sum
+            sum += size
+        self.obj = append_indices.append_indices(degree, initial_indices)
     def append(self, last_snap_locator, added_size, added_data_locator):
         self.obj.append(last_snap_locator, added_size, added_data_locator)
     def snap(self):
@@ -26,10 +22,7 @@ class flat_tree_append_indices:
     def __str__(self):
         return str(self.snap())
     def __iter__(self):
-        sum = 0
-        for leaf_count, size, value in self.obj:
-            yield (leaf_count, value, sum, size)
-            sum += size
+        return iter(self.obj)
 
 class flat_tree_mix_indices(flat_tree_append_indices):
     def __init__(self, degree = 2, initial_indices = []):
